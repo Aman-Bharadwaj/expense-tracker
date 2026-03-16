@@ -28,7 +28,7 @@ while True:
             
     elif choice == "2":
         if not expenses:
-            print("No expences yet")
+            print("No expenses yet")
             
         else:
             for i, exp in enumerate(expenses, start=1):
@@ -43,6 +43,6 @@ while True:
         break
     
     else:
-        print("Invaid choice")
+        print("Invalid choice")
         
     input("Press Enter to continue")
