@@ -10,7 +10,7 @@ This project stores data persistently using a JSON file, allowing users to retai
 - View all expenses
 - Calculate total spending
 - Delete expenses
-- Data persistence using JSON (saved locally)
+- Data persistence using JSON
 
 ## How It Works
 
