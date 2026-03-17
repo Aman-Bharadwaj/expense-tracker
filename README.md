@@ -20,6 +20,7 @@ The program runs in a loop and displays a menu where users can choose different 
 2. View Expenses
 3. Show Total Spending
 4. Exit
+5. Delete Expense
 
 Expenses are stored in a list using Python dictionaries.
 
@@ -38,6 +39,7 @@ Expenses are stored in a list using Python dictionaries.
 2.View Expense
 3.Show Total Spending
 4.Exit
+5.Delete Expense
 
 ## How to Run
 
