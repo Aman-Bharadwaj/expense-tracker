@@ -2,59 +2,40 @@ import os
 
 import json
 
-try:
-    with open("expenses.json","r") as file:
-        expenses = json.load(file)
-except FileNotFoundError:
-    expenses = []
-
-while True:
-    os.system("cls" if os.name == "nt" else "clear")
-    
-    print("-------Expense Tracker-------")
-    print("1.Add Expense")
-    print("2.View expense")
-    print("3.Show Total Spending")
-    print("4.Exit")
-    print("5.Delete Expense")
-    
-    choice = input("Enter choice: ")
-    
-    if choice == "1":
-        try:
-            amount = float(input("Enter amount: "))
-            category = input("Enter category: ")
-            
-            expense = {"amount": amount, "category": category}
-            expenses.append(expense)
-            
-            with open("expenses.json", "w") as file:
-                json.dump(expenses, file, indent=4)
-            
-            print("Expense added!")
-            
-        except ValueError:
-            print("Invalid amount")
-            
-    elif choice == "2":
-        if not expenses:
-            print("No expenses yet")
-            
-        else:
-            for i, exp in enumerate(expenses, start=1):
-                print(f"{i}. {exp['amount']}, {exp['category']}")
-                
-    elif choice == "3":
-        total = sum(exp["amount"] for exp in expenses)
-        print("Total spending", total)
+def save_expenses(expenses):
+    with open("expenses.json", "w") as file:
+        json.dump(expenses, file, indent=4)
         
-    elif choice == "4":
-        print("Exiting...")
-        break
+def add_expense(expenses):
+    try:
+        amount = float(input("Enter amount: "))
+        category = input("Enter category: ")
+        
+        expense = {"amount": amount, "category": category}
+        expenses.append(expense)
+        
+        save_expenses(expenses)
+        
+        print("Expense added!")
+        
+    except ValueError:
+        print("Invaid amount")
+        
+def view_expenses(expenses):
+    if not expenses:
+        print("No expense yet")
+    else:
+        for i, exp in enumerate(expenses, start=1):
+            print(f"{i}, {exp['amount']}, {exp['category']}")
+            
+def show_total(expenses):
+    total = sum(exp["amount"] for exp in expenses)
+    print(f"Total spending: {total}")
     
-    elif choice == "5":
+def delete_expense(expenses):
         if not expenses:
             print("No expense to remove")
+            return
             
         else:
             for i, exp in enumerate(expenses, start=1):
@@ -66,8 +47,7 @@ while True:
                     
                     if 0<= index < len(expenses):
                         expenses.pop(index)
-                        with open("expenses.json", "w") as file:
-                            json.dump(expenses, file, indent=4)
+                        save_expenses(expenses)
                             
                         print("Expense removed")
                         break
@@ -77,8 +57,45 @@ while True:
                                                 
                 except ValueError:
                     print("Please enter a valid number")
+try:
+    with open("expenses.json", "r") as file:
+        expenses = json.load(file)
+except FileNotFoundError:
+    expenses = []
+    
+def main():
+    while True:
+        os.system("cls" if os.name == "nt" else "clear")
+        
+        print("-------Expense Tracker-------")
+        print("1.Add Expense")
+        print("2.View expense")
+        print("3.Show Total Spending")
+        print("4.Exit")
+        print("5.Delete Expense")
+        
+        choice = input("Enter choice: ")
+        
+        if choice == "1":
+            add_expense(expenses)
+                
+        elif choice == "2":
+            view_expenses(expenses)
+                    
+        elif choice == "3":
+            show_total(expenses)
             
-    else:
-        print("Invalid choice")
+        elif choice == "4":
+            print("Exiting...")
+            break
+        
+        elif choice == "5":
+            delete_expense(expenses)
+                
+        else:
+            print("Invalid choice")
 
-    input("Press Enter to continue")
+        input("Press Enter to continue")
+        
+if __name__ == "__main__":
+    main()
