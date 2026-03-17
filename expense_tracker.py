@@ -19,7 +19,7 @@ def add_expense(expenses):
         print("Expense added!")
         
     except ValueError:
-        print("Invaid amount")
+        print("Invalid amount")
         
 def view_expenses(expenses):
     if not expenses:
@@ -32,31 +32,51 @@ def show_total(expenses):
     total = sum(exp["amount"] for exp in expenses)
     print(f"Total spending: {total}")
     
+def get_valid_index(expenses, message):
+    while True:
+        try:
+            index = int(input(message)) -1
+            
+            if 0 <= index < len(expenses):
+                return index
+            else:
+                print("Invalid index")
+                
+        except ValueError:
+            print("Please enter a valid number")
+            
 def delete_expense(expenses):
         if not expenses:
             print("No expense to remove")
             return
             
-        else:
-            for i, exp in enumerate(expenses, start=1):
-                print(f"{i}. {exp['amount']}, {exp['category']}")
+        view_expenses(expenses)
                 
-            while True:       
-                try:        
-                    index = int(input("Expense no. to remove: ")) -1
-                    
-                    if 0<= index < len(expenses):
-                        expenses.pop(index)
-                        save_expenses(expenses)
-                            
-                        print("Expense removed")
-                        break
-                        
-                    else:
-                        print("Invalid index")
-                                                
-                except ValueError:
-                    print("Please enter a valid number")
+        index = get_valid_index(expenses, "Expense no. to remove: ")
+        
+        removed = expenses.pop(index)
+        save_expenses(expenses)
+        
+        print(f"Removed: {removed['amount']} - {removed['category']}")
+        
+def edit_expense(expenses):
+    if not expenses:
+        print("No expense to edit")
+        return
+    view_expenses(expenses)
+    
+    index = get_valid_index(expenses, "Expense no. to edit: ")
+    
+    new_amount = float(input("Enter new amount: "))
+    new_category = input("Enter new category: ")
+    
+    expenses[index]["amount"] = new_amount
+    expenses[index]["category"] = new_category
+    
+    save_expenses(expenses)
+    
+    print("Expense updated!")
+    
 try:
     with open("expenses.json", "r") as file:
         expenses = json.load(file)
@@ -73,6 +93,7 @@ def main():
         print("3.Show Total Spending")
         print("4.Exit")
         print("5.Delete Expense")
+        print("6.Edit Expenses")
         
         choice = input("Enter choice: ")
         
@@ -91,6 +112,9 @@ def main():
         
         elif choice == "5":
             delete_expense(expenses)
+            
+        elif choice == "6":
+            edit_expense(expenses)
                 
         else:
             print("Invalid choice")

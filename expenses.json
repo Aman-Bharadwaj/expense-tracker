@@ -4,11 +4,7 @@
         "category": "Recharge"
     },
     {
-        "amount": 300.0,
-        "category": "Food"
-    },
-    {
-        "amount": 200.0,
-        "category": "Food"
+        "amount": 250.0,
+        "category": "Travel"
     }
 ]

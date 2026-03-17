@@ -11,6 +11,7 @@ This project stores data persistently using a JSON file, allowing users to retai
 - Calculate total spending
 - Delete expenses
 - Data persistence using JSON
+- Edit existing expenses
 
 ## How It Works
 
@@ -51,7 +52,9 @@ python expense_tracker.py
 
 ## Future Improvements
 
-- Edit existing expenses
-- Category-wise expense summary
+## Future Improvements
+
 - Add date/time to each expense
-- Convert into GUI (Tkinter or Web App)
+- Category-wise expense summary
+- Export data to CSV
+- Build GUI or web version
