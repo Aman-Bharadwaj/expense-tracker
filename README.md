@@ -2,13 +2,15 @@
 
 A simple command-line Expense Tracker built with Python.
 This program allows users to record expenses, categorize them, view all expenses, and calculate total spending.
+This project stores data persistently using a JSON file, allowing users to retain their expense history between program runs.
 
 ## Features
 
-* Add an expense with amount and category
-* View all recorded expenses
-* Calculate total spending
-* Simple command-line interface
+- Add expenses with amount and category
+- View all expenses
+- Calculate total spending
+- Delete expenses
+- Data persistence using JSON (saved locally)
 
 ## How It Works
 
@@ -47,7 +49,7 @@ python expense_tracker.py
 
 ## Future Improvements
 
-* Save expenses to a file (JSON/CSV)
-* Add ability to delete expenses
-* Add monthly expense summary
-* Improve user interface
+- Edit existing expenses
+- Category-wise expense summary
+- Add date/time to each expense
+- Convert into GUI (Tkinter or Web App)
